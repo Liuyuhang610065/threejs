@@ -37027,7 +37027,20 @@ var controls = new _OrbitControls.OrbitControls(camera, renderer.domElement);
 // 添加坐标轴辅助器
 var axes = new THREE.AxesHelper(5);
 scene.add(axes);
+
+// 修改物体位置
+cube.position.set(5, 0, 0);
+cube.position.y = 5;
+
+// 缩放
+cube.scale.set(1, 0.5, 2);
+
+// 旋转
+cube.rotation.set(Math.PI / 4, 0, 0);
 function render() {
+  cube.position.x += 0.01;
+  cube.rotateX(0.01);
+  if (cube.position.x > 5) cube.position.x = 0;
   renderer.render(scene, camera);
   requestAnimationFrame(render);
 }
