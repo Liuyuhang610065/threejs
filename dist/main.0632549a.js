@@ -45003,6 +45003,16 @@ gui.add(params, 'fn').name('运动');
 // 文件夹
 var folder = gui.addFolder('设置');
 folder.add(cube.material, 'wireframe');
+
+// 顶点创建几何体
+var geometry = new THREE.BufferGeometry();
+var vertrices = new Float32Array([-1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0]);
+geometry.setAttribute('position', new THREE.BufferAttribute(vertrices, 3));
+var material = new THREE.MeshBasicMaterial({
+  color: 0xffff00
+});
+var mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
 },{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","gsap":"../node_modules/gsap/index.js","dat.gui":"../node_modules/dat.gui/build/dat.gui.module.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

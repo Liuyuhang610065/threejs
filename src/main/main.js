@@ -135,3 +135,18 @@ gui.add(params, 'fn').name('运动')
 // 文件夹
 var folder = gui.addFolder('设置')
 folder.add(cube.material, 'wireframe')
+
+// 顶点创建几何体
+const geometry = new THREE.BufferGeometry()
+const vertrices = new Float32Array([
+    -1.0, -1.0, 1.0,
+    1.0, -1.0, 1.0,
+    1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0,
+    -1.0, 1.0, 1.0,
+    -1.0, -1.0, 1.0
+])
+geometry.setAttribute('position', new THREE.BufferAttribute(vertrices, 3))
+const material = new THREE.MeshBasicMaterial({color: 0xffff00})
+const mesh = new THREE.Mesh(geometry, material)
+scene.add(mesh)
