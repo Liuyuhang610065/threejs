@@ -44890,9 +44890,15 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 0, 10);
 scene.add(camera);
+
+// 纹理
+var textureLoader = new THREE.TextureLoader();
+var door = textureLoader.load('./textures/a.jpg');
 var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+// 材质
 var cubeMaterial = new THREE.MeshBasicMaterial({
-  color: 0xffff00
+  color: 0xffff00,
+  map: door
 });
 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 scene.add(cube);
@@ -45005,14 +45011,37 @@ var folder = gui.addFolder('设置');
 folder.add(cube.material, 'wireframe');
 
 // 顶点创建几何体
-var geometry = new THREE.BufferGeometry();
-var vertrices = new Float32Array([-1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0]);
-geometry.setAttribute('position', new THREE.BufferAttribute(vertrices, 3));
-var material = new THREE.MeshBasicMaterial({
-  color: 0xffff00
-});
-var mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+// const geometry = new THREE.BufferGeometry()
+// const vertrices = new Float32Array([
+//     -1.0, -1.0, 1.0,
+//     1.0, -1.0, 1.0,
+//     1.0, 1.0, 1.0,
+//     1.0, 1.0, 1.0,
+//     -1.0, 1.0, 1.0,
+//     -1.0, -1.0, 1.0
+// ])
+// geometry.setAttribute('position', new THREE.BufferAttribute(vertrices, 3))
+// const material = new THREE.MeshBasicMaterial({color: 0xffff00})
+// const mesh = new THREE.Mesh(geometry, material)
+// scene.add(mesh)
+
+// 爆炸
+for (var i = 0; i < 50; i++) {
+  var geometry = new THREE.BufferGeometry();
+  var positionArray = new Float32Array(9);
+  for (var j = 0; j < 9; j++) {
+    positionArray[j] = Math.random() * 10 - 5;
+  }
+  geometry.setAttribute('position', new THREE.BufferAttribute(positionArray, 3));
+  var color = new THREE.Color(Math.random(), Math.random(), Math.random());
+  var material = new THREE.MeshBasicMaterial({
+    color: color,
+    transparent: true,
+    opacity: 0.5
+  });
+  var mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+}
 },{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","gsap":"../node_modules/gsap/index.js","dat.gui":"../node_modules/dat.gui/build/dat.gui.module.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
